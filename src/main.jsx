@@ -21,14 +21,15 @@ import "./styles.css";
 
 const EMAIL_ADDRESS = "manavgarg2326@gmail.com";
 const GITHUB_PROFILE_URL = "https://github.com/manav363";
+const FORM_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
 
 const disciplines = [
-  "Quant ML",
-  "Backend Systems",
-  "AI Apps",
-  "Product UI",
-  "Architecture",
-  "Trading Research",
+  { label: "Quant ML", href: "#projects" },
+  { label: "Backend Systems", href: "#offerings" },
+  { label: "AI Apps", href: "#projects" },
+  { label: "Product UI", href: "#projects" },
+  { label: "Architecture", href: "#experience" },
+  { label: "Trading Research", href: "#projects" },
 ];
 
 const offerings = [
@@ -78,7 +79,7 @@ const projects = [
     title: "Market Regime Detection",
     short: "Best quant internship signal",
     type: "Quant / ML Research",
-    stack: "Python · FastAPI · Redis · Walk-forward ML · Railway",
+    stack: "Python · FastAPI · Redis · Walk-forward ML",
     summary:
       "Research pipeline for market regime detection, signal generation, risk-managed backtesting, and lightweight demo surfaces.",
     proof:
@@ -95,8 +96,7 @@ const projects = [
     title: "SentiScope",
     short: "Best-tested full-stack AI demo",
     type: "Full-stack NLP App",
-    stack:
-      "FastAPI · Transformers · Torch · Upstash Redis · React · TypeScript · Docker",
+    stack: "FastAPI · Transformers · React · Redis",
     summary:
       "Sentiment analysis product for pasted text and article URLs with confidence breakdowns and a visual dashboard.",
     proof:
@@ -113,7 +113,7 @@ const projects = [
     title: "Intraday Trading AI India",
     short: "NSE 500 research console",
     type: "Trading ML Console",
-    stack: "Python · yfinance · XGBoost · LightGBM · RandomForest · NewsAPI",
+    stack: "Python · yfinance · XGBoost · LightGBM",
     summary:
       "Single-user Indian equities console for symbol analysis, NSE 500 scanning, backtesting, and news-based risk adjustment.",
     proof:
@@ -130,7 +130,7 @@ const projects = [
     title: "APIBlueprint",
     short: "API design studio",
     type: "Full-stack API Tool",
-    stack: "React · Vite · FastAPI · SQLAlchemy · PostgreSQL · Express · Docker",
+    stack: "React · FastAPI · PostgreSQL · Express",
     summary:
       "Define REST endpoints, generate OpenAPI specs, run dynamic mock routes, and keep docs/export tied to project data.",
     proof:
@@ -147,7 +147,7 @@ const projects = [
     title: "Inventory SyncPulse",
     short: "Excel-driven ops dashboard",
     type: "Frontend Product App",
-    stack: "React · Vite · Tailwind · React Router · Recharts · XLSX",
+    stack: "React · Tailwind · Recharts · XLSX",
     summary:
       "Inventory dashboard for stock analysis, conflict detection, and operational visibility from uploaded spreadsheets.",
     proof:
@@ -164,7 +164,7 @@ const projects = [
     title: "Personal AI Assistant",
     short: "Agent architecture",
     type: "AI / LLM Web App",
-    stack: "FastAPI · LangChain · Groq · Tavily · React · Vite",
+    stack: "FastAPI · LangChain · Groq · Tavily",
     summary:
       "Small full-stack assistant with a FastAPI backend, LangChain tool-calling agent, and React chat interface.",
     proof:
@@ -194,6 +194,7 @@ function App() {
     idea: "",
     focus: "AI/ML internship",
   });
+  const [submitStatus, setSubmitStatus] = useState("");
 
   const mailtoHref = useMemo(() => {
     const subject = encodeURIComponent(`Portfolio inquiry from ${form.name || "visitor"}`);
@@ -215,6 +216,43 @@ function App() {
     setForm((current) => ({ ...current, [name]: value }));
   }
 
+  async function submitContact(event) {
+    event.preventDefault();
+
+    if (!FORM_ENDPOINT) {
+      window.location.href = mailtoHref;
+      return;
+    }
+
+    setSubmitStatus("Sending...");
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Contact form request failed");
+      }
+
+      setSubmitStatus("Sent. I will reply by email.");
+      setForm({
+        name: "",
+        email: "",
+        company: "",
+        idea: "",
+        focus: "AI/ML internship",
+      });
+    } catch {
+      setSubmitStatus("Could not send in-page. Opening an email draft instead.");
+      window.location.href = mailtoHref;
+    }
+  }
+
   return (
     <main>
       <Hero />
@@ -224,7 +262,13 @@ function App() {
       <Projects />
       <Credibility />
       <Stats />
-      <Contact form={form} mailtoHref={mailtoHref} updateForm={updateForm} />
+      <Contact
+        form={form}
+        mailtoHref={mailtoHref}
+        onSubmit={submitContact}
+        submitStatus={submitStatus}
+        updateForm={updateForm}
+      />
       <Footer />
     </main>
   );
@@ -247,6 +291,10 @@ function Hero() {
       <div className="hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">Hello! I am</p>
+          <div className="availability-badge" aria-label="Availability status">
+            <span />
+            Open to internships · Summer 2026
+          </div>
           <h1>
             Manav Garg
             <span>AI/Quant Engineer</span>
@@ -280,6 +328,10 @@ function Hero() {
         <div className="system-portrait" aria-label="Abstract AI and quant systems portrait">
           <div className="signal-cloud signal-one" />
           <div className="signal-cloud signal-two" />
+          <div className="system-status" aria-hidden="true">
+            <span>Live</span>
+            <strong>Signal OS</strong>
+          </div>
           <div className="portrait-panel">
             <div className="orbital orbital-a" />
             <div className="orbital orbital-b" />
@@ -294,6 +346,7 @@ function Hero() {
                 <Database aria-hidden="true" />
               </div>
               <div className="terminal-card">
+                <div className="terminal-scan" aria-hidden="true" />
                 <div className="terminal-heading">
                   <span>Signal lab</span>
                   <strong>3 live tracks</strong>
@@ -340,7 +393,9 @@ function Ribbon() {
   return (
     <section className="ribbon" aria-label="Disciplines">
       {disciplines.map((item) => (
-        <span key={item}>{item}</span>
+        <a href={item.href} key={item.label}>
+          {item.label}
+        </a>
       ))}
     </section>
   );
@@ -367,6 +422,7 @@ function Offerings() {
           const Icon = item.icon;
           return (
             <article className={index === 0 ? "offering-card active" : "offering-card"} key={item.title}>
+              {index === 0 && <span className="card-badge">Primary track</span>}
               <Icon aria-hidden="true" />
               <h3>{item.title}</h3>
               <p>{item.detail}</p>
@@ -443,7 +499,7 @@ function ProjectCard({ project, index }) {
           </div>
         </dl>
         <a href={project.repoUrl} target="_blank" rel="noreferrer">
-          See details <ArrowUpRight aria-hidden="true" />
+          View repo <ArrowUpRight aria-hidden="true" />
         </a>
       </div>
     </article>
@@ -487,7 +543,7 @@ function ProjectMockup({ project }) {
 function Credibility() {
   return (
     <section className="credibility">
-      <span className="section-kicker">Client feedback</span>
+      <span className="section-kicker">Engineering philosophy</span>
       <blockquote>
         "I think in failure modes before features, document architecture before code,
         and treat reproducibility as a first-class requirement."
@@ -518,13 +574,13 @@ function Stats() {
   );
 }
 
-function Contact({ form, mailtoHref, updateForm }) {
+function Contact({ form, mailtoHref, onSubmit, submitStatus, updateForm }) {
   return (
     <section className="section contact" id="contact">
       <SectionHeader kicker="Say hi" title="Tell me about your idea.">
         Have a role, project, internship, or AI system worth discussing? Reach out and I will get back to you.
       </SectionHeader>
-      <form className="contact-form" action={mailtoHref}>
+      <form className="contact-form" action={FORM_ENDPOINT || mailtoHref} onSubmit={onSubmit}>
         <label>
           Name
           <input name="name" value={form.name} onChange={updateForm} placeholder="Hello..." />
@@ -560,10 +616,12 @@ function Contact({ form, mailtoHref, updateForm }) {
             </label>
           ))}
         </div>
-        <a className="button primary submit-button" href={mailtoHref}>
-          Get in touch <Send aria-hidden="true" />
-        </a>
-        <p className="form-note">This opens a mail draft to {EMAIL_ADDRESS}.</p>
+        <button className="button primary submit-button" type="submit">
+          {FORM_ENDPOINT ? "Send message" : "Send email draft"} <Send aria-hidden="true" />
+        </button>
+        <p className="form-note">
+          {submitStatus || (FORM_ENDPOINT ? "This sends in-page." : "Add VITE_FORMSPREE_ENDPOINT for in-page sending.")}
+        </p>
       </form>
     </section>
   );
