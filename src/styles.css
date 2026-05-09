@@ -23,7 +23,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 18px;
+  scroll-padding-top: 70px;
   overflow-x: hidden;
   overscroll-behavior-x: none;
 }
@@ -78,7 +78,7 @@ main {
 .credibility,
 .stats,
 .footer {
-  scroll-margin-top: 18px;
+  scroll-margin-top: 70px;
 }
 
 .hero {
@@ -2323,3 +2323,4 @@ textarea:focus {
     transform: none;
   }
 }
+
