@@ -13,9 +13,8 @@ export default function Footer() {
         </a>
         <a
           href={RESUME_URL}
+          download="Manav_Garg_Resume.pdf"
           aria-label="Download résumé"
-          target={RESUME_URL !== "#contact" ? "_blank" : undefined}
-          rel={RESUME_URL !== "#contact" ? "noreferrer" : undefined}
         >
           <FileText aria-hidden="true" /> Résumé
         </a>

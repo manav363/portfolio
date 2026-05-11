@@ -2,7 +2,7 @@ import { BrainCircuit, Database, TrendingUp } from "lucide-react";
 
 export const EMAIL_ADDRESS = "manavgarg2326@gmail.com";
 export const GITHUB_PROFILE_URL = "https://github.com/manav363";
-export const RESUME_URL = import.meta.env.VITE_RESUME_URL || "#contact";
+export const RESUME_URL = import.meta.env.VITE_RESUME_URL || "/RESUME.pdf";
 export const FORM_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
 
 export const disciplines = [

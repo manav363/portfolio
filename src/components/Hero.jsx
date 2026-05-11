@@ -23,8 +23,7 @@ export default function Hero() {
           <a href="#contact">Contact</a>
           <a
             href={RESUME_URL}
-            target={RESUME_URL !== "#contact" ? "_blank" : undefined}
-            rel={RESUME_URL !== "#contact" ? "noreferrer" : undefined}
+            download="Manav_Garg_Resume.pdf"
             aria-label="Download résumé"
           >
             <FileText aria-hidden="true" style={{ width: 13, height: 13, marginRight: 4, verticalAlign: "middle" }} />
@@ -69,8 +68,8 @@ export default function Hero() {
             </a>
             <a
               className="button ghost"
-              href="/Manav_Garg_Resume.docx"
-              download="Manav_Garg_Resume.docx"
+              href="/RESUME.pdf"
+              download="Manav_Garg_Resume.pdf"
               aria-label="Download résumé"
             >
               Résumé <Download aria-hidden="true" />
