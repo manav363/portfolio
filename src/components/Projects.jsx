@@ -1,4 +1,4 @@
-import { ArrowUpRight, Network } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Network } from "lucide-react";
 import { projects } from "../data.js";
 import SectionHeader from "./SectionHeader.jsx";
 
@@ -39,7 +39,11 @@ function ProjectMockup({ project }) {
 function ProjectCard({ project, index }) {
   const isEven = index % 2 === 0;
   return (
-    <article className={`project-card ${isEven ? "left" : "right"}`}>
+    <article
+      className={`project-card ${isEven ? "left" : "right"}`}
+      data-reveal
+      data-reveal-delay={index}
+    >
       <div className={`project-visual ${project.accent}`}>
         <ProjectMockup project={project} />
       </div>
@@ -57,9 +61,21 @@ function ProjectCard({ project, index }) {
             <dd>{project.proof}</dd>
           </div>
         </dl>
-        <a href={project.repoUrl} target="_blank" rel="noreferrer">
-          View repo <ArrowUpRight aria-hidden="true" />
-        </a>
+        <div className="project-links">
+          <a href={project.repoUrl} target="_blank" rel="noreferrer">
+            View repo <ArrowUpRight aria-hidden="true" />
+          </a>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="button primary project-live-btn"
+            >
+              Live demo <ExternalLink aria-hidden="true" />
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );
@@ -76,7 +92,7 @@ export default function Projects() {
           <ProjectCard project={project} index={index} key={project.title} />
         ))}
       </div>
-      <div className="fundamentals">
+      <div className="fundamentals" data-reveal>
         <span>Frontend fundamentals also covered:</span>
         <strong>CineStats</strong>
         <strong>UrbenShop</strong>

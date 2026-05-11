@@ -3,7 +3,7 @@ import { GITHUB_PROFILE_URL, EMAIL_ADDRESS, RESUME_URL } from "../data.js";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" data-reveal>
       <div className="socials" aria-label="Public links">
         <a href={GITHUB_PROFILE_URL} aria-label="Manav Garg GitHub" target="_blank" rel="noreferrer">
           <Github aria-hidden="true" /> GitHub

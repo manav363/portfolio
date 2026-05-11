@@ -2,7 +2,7 @@ import { Sparkles } from "lucide-react";
 
 export default function Credibility() {
   return (
-    <section className="credibility">
+    <section className="credibility" data-reveal>
       <span className="section-kicker">Engineering philosophy</span>
       <blockquote>
         "I think in failure modes before features, document architecture before code,

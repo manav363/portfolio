@@ -73,6 +73,7 @@ export const projects = [
     visualNote: "Regime research console",
     accent: "ink",
     repoUrl: "https://github.com/manav363/market-regime-detection",
+    liveUrl: "",
   },
   {
     title: "SentiScope",
@@ -90,6 +91,7 @@ export const projects = [
     visualNote: "Sentiment analysis workspace",
     accent: "lime",
     repoUrl: "https://github.com/manav363/sentiment-dashboard",
+    liveUrl: "",
   },
   {
     title: "Intraday Trading AI India",
@@ -107,6 +109,7 @@ export const projects = [
     visualNote: "Intraday research terminal",
     accent: "blue",
     repoUrl: "https://github.com/manav363/intraday-trading-ai-india",
+    liveUrl: "",
   },
   {
     title: "APIBlueprint",
@@ -124,6 +127,7 @@ export const projects = [
     visualNote: "API design control room",
     accent: "paper",
     repoUrl: "https://github.com/manav363/apiblueprint",
+    liveUrl: "",
   },
   {
     title: "Inventory SyncPulse",
@@ -141,6 +145,7 @@ export const projects = [
     visualNote: "Operations dashboard",
     accent: "grid",
     repoUrl: "https://github.com/manav363/inventory-system",
+    liveUrl: "",
   },
   {
     title: "Personal AI Assistant",
@@ -158,6 +163,7 @@ export const projects = [
     visualNote: "Agent interface",
     accent: "rose",
     repoUrl: "https://github.com/manav363/personal-ai-assistant",
+    liveUrl: "",
   },
 ];
 
@@ -166,4 +172,31 @@ export const stats = [
   { value: "06", label: "lead projects shown" },
   { value: "03", label: "core tracks: quant, backend, AI" },
   { value: "2026", label: "internship-ready target" },
+];
+
+export const articles = [
+  {
+    title: "Walk-Forward Validation: Why Most ML Backtests Lie",
+    description:
+      "How temporal data leakage invalidates 90% of ML trading research, and how walk-forward modeling fixes it.",
+    tag: "Quant ML",
+    date: "2026",
+    url: "https://github.com/manav363/market-regime-detection#walk-forward-validation",
+  },
+  {
+    title: "Building a Market Regime Detector from Scratch",
+    description:
+      "End-to-end architecture of a 3-class regime classifier: data pipeline, feature engineering, and risk-managed backtesting.",
+    tag: "Architecture",
+    date: "2026",
+    url: "https://github.com/manav363/market-regime-detection#architecture",
+  },
+  {
+    title: "FastAPI + Redis: Caching Patterns for ML Inference",
+    description:
+      "Practical caching strategies for HuggingFace model inference behind a FastAPI service with Redis.",
+    tag: "Backend",
+    date: "2026",
+    url: "https://github.com/manav363/sentiment-dashboard#caching",
+  },
 ];

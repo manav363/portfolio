@@ -9,6 +9,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { RESUME_URL } from "../data.js";
+import DarkModeToggle from "./DarkModeToggle.jsx";
 
 export default function Hero() {
   return (
@@ -20,6 +21,7 @@ export default function Hero() {
         <div className="nav-links">
           <a href="#offerings">Offer</a>
           <a href="#projects">Projects</a>
+          <a href="#blog">Writing</a>
           <a href="#contact">Contact</a>
           <a
             href={RESUME_URL}
@@ -29,6 +31,7 @@ export default function Hero() {
             <FileText aria-hidden="true" style={{ width: 13, height: 13, marginRight: 4, verticalAlign: "middle" }} />
             Résumé
           </a>
+          <DarkModeToggle />
         </div>
       </nav>
 
@@ -68,7 +71,7 @@ export default function Hero() {
             </a>
             <a
               className="button ghost"
-              href="/RESUME.pdf"
+              href={RESUME_URL}
               download="Manav_Garg_Resume.pdf"
               aria-label="Download résumé"
             >
@@ -85,6 +88,17 @@ export default function Hero() {
             <strong>Signal OS</strong>
           </div>
           <div className="portrait-panel">
+            <div className="hero-avatar-wrap">
+              <img
+                className="hero-avatar"
+                src="/avatar.webp"
+                alt="Manav Garg"
+                width="220"
+                height="220"
+                loading="eager"
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+              />
+            </div>
             <div className="orbital orbital-a" />
             <div className="orbital orbital-b" />
             <div className="face-code">

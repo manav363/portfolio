@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { EMAIL_ADDRESS, FORM_ENDPOINT } from "./data.js";
+import useScrollReveal from "./hooks/useScrollReveal.js";
 import Hero from "./components/Hero.jsx";
 import Ribbon from "./components/Ribbon.jsx";
 import Offerings from "./components/Offerings.jsx";
@@ -7,11 +8,14 @@ import Experience from "./components/Experience.jsx";
 import Projects from "./components/Projects.jsx";
 import Credibility from "./components/Credibility.jsx";
 import Stats from "./components/Stats.jsx";
+import Blog from "./components/Blog.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import "./styles.css";
 
 export default function App() {
+  useScrollReveal();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -80,7 +84,7 @@ export default function App() {
   }
 
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <Ribbon />
       <Offerings />
@@ -88,6 +92,7 @@ export default function App() {
       <Projects />
       <Credibility />
       <Stats />
+      <Blog />
       <Contact
         form={form}
         mailtoHref={mailtoHref}

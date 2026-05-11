@@ -4,7 +4,7 @@ import SectionHeader from "./SectionHeader.jsx";
 
 export default function Offerings() {
   return (
-    <section className="section offerings" id="offerings">
+    <section className="section offerings" id="offerings" data-reveal>
       <SectionHeader kicker="What I am offering" title="Systems that connect AI to real decisions.">
         Not a stack list. The work is about architecture, proof, and making the demo tell the truth.
       </SectionHeader>
@@ -12,7 +12,12 @@ export default function Offerings() {
         {offerings.map((item, index) => {
           const Icon = item.icon;
           return (
-            <article className={index === 0 ? "offering-card active" : "offering-card"} key={item.title}>
+            <article
+              className={index === 0 ? "offering-card active" : "offering-card"}
+              key={item.title}
+              data-reveal
+              data-reveal-delay={index}
+            >
               {index === 0 && <span className="card-badge">Primary track</span>}
               <Icon aria-hidden="true" />
               <h3>{item.title}</h3>

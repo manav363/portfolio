@@ -4,7 +4,7 @@ import SectionHeader from "./SectionHeader.jsx";
 
 export default function Contact({ form, mailtoHref, onSubmit, submitStatus, updateForm }) {
   return (
-    <section className="section contact" id="contact">
+    <section className="section contact" id="contact" data-reveal>
       <SectionHeader kicker="Say hi" title="Tell me about your idea.">
         Have a role, project, internship, or AI system worth discussing? Reach out and I will get back to you.
       </SectionHeader>
